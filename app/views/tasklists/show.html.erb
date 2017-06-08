@@ -1,0 +1,11 @@
+<h1>id =
+<%= @tasklist.id %>
+のタスクリスト詳細ページ</h1>
+
+<p>
+  <%= @tasklist.content %>
+</p>
+
+<%= link_to "一覧に戻る", tasklists_path %>
+<%= link_to "このメッセージを編集する", edit_tasklist_path(@tasklist) %>
+<%= link_to "このメッセージを削除する", @tasklist, method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
