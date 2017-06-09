@@ -1,11 +1,10 @@
 class TasklistsController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_tasklist, only: [:show, :edit, :update, :destroy]
   def index
     @tasklists = Tasklist.all
   end
 
   def show
-    
   end
 
   def new
@@ -52,6 +51,6 @@ class TasklistsController < ApplicationController
   end
   
   def tasklist_params
-    params.require(:tasklist).permit(:content)
+    params.require(:tasklist).permit(:content, :title)
   end
 end
