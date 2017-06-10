@@ -1,14 +1,35 @@
 <h1>タスクリスト一覧</h1>
 
-<ul>
+<% if @tasklists.any? %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>ステータス</th>
+        <th>タスクリスト</th></th>
+      </tr>
+    </thead>
+    <tbody>
+
   <% @tasklists.each do |tasklist| %>
-   <li>
+   <tr>
+     <td>
      <%= link_to tasklist.id, tasklist %>
-     
+     </td>
+     <td>
      <%= tasklist.status %>
-     
+     </td>
+     <td>
      <%= tasklist.content %>
-   </li>
+   </td>
+   </tr>
    <% end %>
-</ul>
-<%= link_to "新規タスクリストの登録", new_tasklist_path %>
+   </tbody>
+   </table>
+   
+<% end %>
+
+<%= paginate @tasklists %>
+
+<%= link_to '新規タスクリストの投稿', new_tasklist_path, class: "btn btn-primary" %>

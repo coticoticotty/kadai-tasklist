@@ -18,18 +18,22 @@
   
 <% end %>  
 
-<%= f.label :status, 'ステータス' %>
+<div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
-  
-<%= f.text_field :status %>
+<div class="form-group">
+
+  <%= f.label :status, 'ステータス' %>
+<%= f.text_field :status, class: "form-control" %>
+</div>
+
+<div class="form-group">
 
 <%= f.label :content, 'タスクリスト' %>
-
   
-<%= f.text_field :content %>
-
-
-  
-<%= f.submit '投稿' %>
+<%= f.text_field :content, class: "form-control" %>
+</div>
+<%= f.submit '投稿', class: "btn btn-primary clearfix" %>
 
 <% end %>
+
+</div>
