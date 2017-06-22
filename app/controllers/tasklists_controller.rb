@@ -1,5 +1,8 @@
 class TasklistsController < ApplicationController
   before_action :set_tasklist, only: [:show, :edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :correct_user, only: [:edit, :destroy]
+  
   def index
     @tasklists = Tasklist.all.page(params[:page]).per(5)
   end
@@ -12,7 +15,7 @@ class TasklistsController < ApplicationController
   end
 
   def create
-    @tasklist = Tasklist.new(tasklist_params)
+    @tasklist = current_user.tasklists.build(tasklist_params)
     
     if @tasklist.save
       flash[:success] = "Tasklistが正常に投稿されました"
@@ -45,12 +48,20 @@ class TasklistsController < ApplicationController
   end
 
   private
-  
+
+    def tasklist_params
+    params.require(:tasklist).permit(:content, :status)
+    end
+    
   def set_tasklist
     @tasklist = Tasklist.find(params[:id])
   end
-  
-  def tasklist_params
-    params.require(:tasklist).permit(:content, :status)
+
+  def correct_user
+    @tasklist = current_user.tasklists.find_by(id: params[:id])
+   unless @tasklist
+      flash[:danger] = "投稿者しか編集できません"
+      redirect_to tasklist_url
+   end
   end
 end
