@@ -1,10 +1,13 @@
 class TasklistsController < ApplicationController
   before_action :set_tasklist, only: [:show, :edit, :update, :destroy]
   before_action :require_user_logged_in, only: [:index, :show]
-  before_action :correct_user, only: [:edit, :destroy]
+  before_action :correct_user, only: [:show, :edit, :destroy]
   
   def index
-    @tasklists = Tasklist.all.page(params[:page]).per(5)
+    if logged_in?
+      @user = current_user
+      @tasklists = current_user.tasklists.order('created_at DESC').page(params[:page])
+    end
   end
 
   def show

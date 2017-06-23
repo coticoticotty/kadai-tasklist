@@ -25,3 +25,4 @@
 
 <%= link_to "このメッセージを編集する", edit_tasklist_path(@tasklist), class: "btn btn-default" %>
 <%= link_to "このメッセージを削除する", @tasklist, method: :delete, data: { confirm: "本当に削除してよろしいですか？"}, class: "btn btn-danger" %>
+<br><%= link_to "一覧に戻る", tasklists_path %>
