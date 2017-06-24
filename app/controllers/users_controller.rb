@@ -8,13 +8,13 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
-      redirect_to root_path
+      redirect_to tasklists_url
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
    end
- end
+end
 
   private
 
