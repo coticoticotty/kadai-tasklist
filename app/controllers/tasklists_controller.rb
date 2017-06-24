@@ -1,8 +1,8 @@
 class TasklistsController < ApplicationController
   before_action :set_tasklist, only: [:show, :edit, :update, :destroy]
-  before_action :require_user_logged_in, only: [:index, :show]
-  before_action :correct_user, only: [:show, :edit, :destroy]
-  
+  before_action :require_user_logged_in, only: [:index, :new, :show, :edit, :destroy]
+#  before_action :correct_user, only: [:show, :edit, :destroy]
+
   def index
     if logged_in?
       @user = current_user
@@ -60,11 +60,10 @@ class TasklistsController < ApplicationController
     @tasklist = Tasklist.find(params[:id])
   end
 
-  def correct_user
-    @tasklist = current_user.tasklists.find_by(id: params[:id])
-   unless @tasklist
-      flash[:danger] = "投稿者しか編集できません"
-      redirect_to tasklist_url
-   end
-  end
+#  def correct_user
+#   @tasklist = current_user.tasklists.find_by(id: params[:id])
+#   unless @tasklist
+#      render tasklists_url
+#   end
+#  end
 end
